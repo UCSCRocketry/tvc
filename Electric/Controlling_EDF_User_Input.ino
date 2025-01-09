@@ -24,13 +24,15 @@ void setup() {
   // ESC should now be armed
   Serial.println("ESC calibrated and armed. Ready for operation.");
 }
+int throttle = 1000; 
 
 void loop() {
-  int throttle = 1000; 
   int duration = 10000;      // Total duration in milliseconds (10 seconds)
   if (Serial.available() > 0) {
-    userInput = Serial.parseInt();
+    int userInput = Serial.parseInt();
     throttle = userInput;
+    Serial.println(userInput);
+
   }
   // Optional: Hold at max throttle for 2 seconds
   delay(2000);
