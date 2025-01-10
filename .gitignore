@@ -29,6 +29,9 @@ codegen/
 # Cache files
 *.slxc
 
+# don't show vscode
+.vscode/
+
 # Cloud based storage dotfile
 .MATLABDriveTag
 
