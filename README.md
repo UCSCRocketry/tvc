@@ -1,5 +1,7 @@
 # TVC 
 ---
+-- moved to tvc-embedded and computer-vision repositories 
+--- 
 ## Thrust Vector Control Project 
 TVC Project at UCSC Rocket Team -- SW side of things :3 
 
