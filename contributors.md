@@ -2,7 +2,7 @@
 ## Contributors
 
 First, checkout a branch for 
-Add your name and signature below with the same format
+Add your name and signature to *YOUR BRANCH* and it will be merged into this one (/main)
 
 | Name | Signature |
 |:-----|:--------|
