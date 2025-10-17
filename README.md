@@ -20,7 +20,7 @@ You can copy the url from the green "code" button
 - This will get the latest version from the GitHub repo and merge them into your branch
 
 
-## BRANCHES (Always make a branch for any changes):
+## BRANCHES (Always make a branch for any batches of changes --then make your commits to that branch; REMEMBER TO PULL MAIN BEFORE YOU WORK!):
 
 Name your branches with this format:
 ```<type>/<topic>/<signature>```
@@ -42,8 +42,6 @@ These are less defined than Types, but please try to keep naming consistent.
 It is important to end your branch name with your signature, both for organization and so you can have credit for what you add.
  - For the format, use ```{first name}{last initial}```
  - Ex: My (Harry Whalen) branch would end with ```/harryw```
-
-If you would strongly prefer to have a different signature, change it to whatever you like but please keep it consistent.
 
 <br>
 
