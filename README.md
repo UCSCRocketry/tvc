@@ -117,7 +117,6 @@ If this is your first time contributing to this project, make your first change 
 - edit ```contributors.md``` by adding your name and signature, keeping the same formatting
 - Follow the steps to commit and push your changes (don't forget to pull the latest changes first!)
 - Review your PR, and merge it with the main branch if there are no conflicts
-- (you don't need to wait for someone else to review it this time)
 - once you merge it into main, you can delete your branch
 
 
