@@ -9,3 +9,4 @@ Add your name and signature to *YOUR BRANCH* and it will be merged into this one
 | Harry Whalen | harryw |
 | Kayden Ozdemir | kaydeno |
 | Michi Tanaka | michit |
+| David Kim | davidk |
