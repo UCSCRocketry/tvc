@@ -15,3 +15,4 @@ Add your name and signature to *YOUR BRANCH* and it will be merged into this one
 | Niklas Naworal | niklasn |
 | Kimaya Basu | kimayab |
 | Prateek Gupta | prateekg |
+| Aryan Dasika | aryand |
