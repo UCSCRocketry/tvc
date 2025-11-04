@@ -3,70 +3,56 @@
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
-/* This driver reads raw data from the BNO055
-
-   Connections
-   ===========
-   Connect SCL to analog 5
-   Connect SDA to analog 4
-   Connect VDD to 3.3V DC
-   Connect GROUND to common ground
-
-   History
-   =======
-   2015/MAR/03  - First release (KTOWN)
-*/
 
 /* Set the delay between fresh samples */
-#define BNO055_SAMPLERATE_DELAY_MS (100)
+#define SAMPLERATE_DELAY_MS (100)
+
+
+
+// IMU INITIALIZATION
 
 // Check I2C device address and correct line below (by default address is 0x29 or 0x28)
 //                                   id, address
 Adafruit_BNO055 bno = Adafruit_BNO055(-1, 0x28, &Wire);
 
-/**************************************************************************/
-/*
-    Arduino setup function (automatically called at startup)
-*/
-/**************************************************************************/
+// ############ PUT REST OF SENSOR INITALIZATION HERE ################
+
+
+
+
 void setup(void)
 {
+  //serial initialization
   Serial.begin(115200);
-
   while (!Serial) delay(10);  // wait for serial port to open!
 
-  Serial.println("Orientation Sensor Raw Data Test"); Serial.println("");
 
-  /* Initialise the sensor */
+  //IMU initialization
+  //initialize 
   if(!bno.begin())
   {
-    /* There was a problem detecting the BNO055 ... check your connections */
-    Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
+    Serial.print("BNO Not detected. quitting");
     while(1);
   }
+  
+  //IMU integrated temp resadings 
+  int8_t temp = bno.getTemp();
+
+  //############ PUT REST OF SENSOR INTIALIZATION HERE
+
 
   delay(1000);
 
-  /* Display the current temperature */
-  int8_t temp = bno.getTemp();
-  Serial.print("Current Temperature: ");
-  Serial.print(temp);
-  Serial.println(" C");
-  Serial.println("");
+
 
   bno.setExtCrystalUse(true);
 
   Serial.println("Calibration status values: 0=uncalibrated, 3=fully calibrated");
 }
 
-/**************************************************************************/
-/*
-    Arduino loop function, called once 'setup' is complete (your own code
-    should go here)
-*/
-/**************************************************************************/
 void loop(void)
 {
+  // IMU 
   // Possible vector values can be:
   // - VECTOR_ACCELEROMETER - m/s^2
   // - VECTOR_MAGNETOMETER  - uT
@@ -111,5 +97,7 @@ void loop(void)
   Serial.print(" Mag=");
   Serial.println(mag, DEC);
 
-  delay(BNO055_SAMPLERATE_DELAY_MS);
+  delay(SAMPLERATE_DELAY_MS);
+
+
 }
