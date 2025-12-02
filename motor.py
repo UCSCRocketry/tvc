@@ -1,12 +1,22 @@
 # stores information about motor and gimbal for use in rocket class
-
+# ALL CALCULATIONS DONE IN BODY REFERENCE FRAME, relative to center of mass
 
 class Motor:
 
-    def __init__(self):
-        pass
+    #i dont know how to set it up such that we can get moment of impulse from changing the motor rpm
+    def __init__(self, 
+                 thrustCurve, # lookup table, from lookupTable.py (in Newtons)
+                 gimbalPosition, #3d vector, from center of mass of rocket (meters)
+                 maxGimbalAngle, #2d vector (rad)
+                 maxGimbalRate, #2d vector (rad/s^2)
+                 ):
+        self.thrustCurve = thrustCurve
+        self.angularMomentumCurve
 
-    def vectorTo(self): #vector to angle, in degrees. Takes time to vector, probably?
+        
+        self.targetAngle = 0 
+
+    def vectorTo(self): #vector to angle, in rads. Takes time to vector, probably?
         pass
     
     def throttleTo(self): #throttle to thrust percentage (0-100). Takes time to spool, probably?
