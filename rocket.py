@@ -30,6 +30,9 @@ class Rocket:
 
     components: list = field(default_factory=list[Component])
 
+    global_time: float = 0.0 # time from start of simulation
+
+
     # adds a physics component to the components list
     def addComponent(self, component : Component):
         self.components.append(component)
@@ -97,4 +100,5 @@ class Rocket:
         if n > 0:
             self.q /= n
 
+        self.global_time += dt
         
