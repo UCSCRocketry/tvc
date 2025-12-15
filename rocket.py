@@ -1,28 +1,100 @@
 # stores information about rocket class for use in simulation class
 
+from dataclasses import dataclass, field
+from physics_component import Component 
 
-# stores center of gravity, thrust, as position vector from base of rocket 
+import numpy as np
+from numpy import linalg
+import rocket_math as rmp
+import quaternion as qt
 
 
+@dataclass # this automatically creates the constructor
 class Rocket:
-
-    def __init__(self):
-        self.mass #mass in kilograms, float
-        self.CoG #center of gravity; coordinates in meters, float
-        self.CoT #center of thrust; coordinates in meters, float
-
-        self.motor #motor model from motor class
-
     
-    def induceForce(self, force):
-        pass #induces force on rocket 
+    #state  variables
+    x: np.ndarray #world
+    v: np.ndarray #world
+    w_body: np.ndarray #body    
+    q: qt.quaternion #body to world
 
-    def calcMoments(self):
-        pass
+    m: float 
+    J_body: np.ndarray #body about CoM
 
-    def calcForces(self):
-        pass
+    ground_elev: float | None = None
 
-    def updatePosition(self):
-        #velocity verlet alg 
-        pass
+    # accumulators
+    F_body: np.ndarray = field(default_factory=lambda: np.zeros(3))
+    F_world: np.ndarray = field(default_factory=lambda: np.zeros(3))
+    tau_body: np.ndarray = field(default_factory=lambda: np.zeros(3))
+
+    components: list = field(default_factory=list[Component])
+
+    # adds a physics component to the components list
+    def addComponent(self, component : Component):
+        self.components.append(component)
+
+
+    #ran each step of the simulation. requires to be sent delta time from previous step in seconds
+    # for realtime simulation, dt is calculated on runtime
+    # for non-realtime simulation, dt can be a small, constant step where smaller dt means greater frequency
+    def step(self, dt: float):
+        #calculate forces and moments
+        self.F_body[:] = 0.0
+        self.F_world[:] = 0.0
+        self.tau_body[:] = 0.0
+
+        # applies each of the components, which will in turn update the forces and moments acting on the rocket.
+        for c in self.components:
+            c.apply(self) 
+        
+        #calculate linear acceleration
+        F_net_world = self.F_world +  self.F_body @ qt.as_rotation_matrix(self.q) 
+        #v_dot_body = self.F_body / self.m
+        v_dot_world = F_net_world/self.m
+        
+        #calculate angular acceleration
+        # someone should double-check this math
+        Jw = self.J_body @ self.w_body
+        gyro = np.cross(self.w_body, Jw)
+        w_dot = np.linalg.solve(self.J_body, (self.tau_body - gyro))
+
+        #calculate linear velocity
+        
+        self.v += v_dot_world * dt
+
+        #calculate angular velocity
+        self.w_body += w_dot * dt
+
+        #calculate new position
+        self.x += self.v * dt 
+
+        #check if ground elev has been defined and set accordingly
+        if self.ground_elev is not None: 
+            if self.x[2] < self.ground_elev:
+                self.x[2] = self.ground_elev
+                self.v[2] = 0
+
+
+        #calculate new orientation
+        #calc new quaternion d_q from d_theta and multiply to original quaternion
+        w_body_mag = linalg.norm(self.w_body)
+        w_body_norm = self.w_body
+        if w_body_mag > 0:
+            w_body_norm /= w_body_mag
+
+        
+        d_theta = w_body_norm * dt
+        
+        #calculate new body to world quaternion and normalize
+        
+        # dq_w = np.cos(d_theta / 2.0)
+        # dq_r = (self.w / w_norm) * np.sin(d_theta / 2.0)
+
+        dq = qt.from_euler_angles(d_theta)
+        self.q = (self.q * dq)
+        n = np.abs(self.q)
+        if n > 0:
+            self.q /= n
+
+        

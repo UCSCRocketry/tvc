@@ -1,9 +1,6 @@
-# stores information about motor and gimbal for use in rocket class
-# ALL CALCULATIONS DONE IN BODY REFERENCE FRAME, relative to center of mass
-
+### all of this is out of date with how it's currently implemented. read README and other files to understand.
 class Motor:
 
-    #i dont know how to set it up such that we can get moment of impulse from changing the motor rpm
     def __init__(self, 
                  thrustCurve, # lookup table, from lookupTable.py (in Newtons)
                  gimbalPosition, #3d vector, from center of mass of rocket (meters)
@@ -24,4 +21,3 @@ class Motor:
 
     def calcForces(self):
         pass
-
