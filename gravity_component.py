@@ -18,8 +18,12 @@ class Gravity_Component(Component):
     def apply(self, rocket : Rocket):
         if self.using_universal_gravity:
             r = rocket.x[2]
-            F_G = GEOCENTRIC_GRAV_CONST * self.planet_mass / ((r + R_EARTH)**2)
+            F_G = rocket.m * GEOCENTRIC_GRAV_CONST * self.planet_mass / ((r + R_EARTH)**2)
             rocket.F_world += np.array([0.0,0.0,-F_G])
         else:
             F_G = rocket.m * GRAVITATIONAL_ACCEL
             rocket.F_world += np.array([0.0,0.0,-F_G])
+    
+    def get_state_data(self):
+        return dict()
+    

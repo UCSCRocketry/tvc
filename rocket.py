@@ -32,6 +32,7 @@ class Rocket:
 
     global_time: float = 0.0 # time from start of simulation
 
+    F_net_world: np.ndarray = field(default_factory=lambda: np.zeros(3))
 
     # adds a physics component to the components list
     def addComponent(self, component : Component):
@@ -53,6 +54,7 @@ class Rocket:
         
         #calculate linear acceleration
         F_net_world = self.F_world +  self.F_body @ qt.as_rotation_matrix(self.q) 
+        self.F_net_world = F_net_world
         #v_dot_body = self.F_body / self.m
         v_dot_world = F_net_world/self.m
         
