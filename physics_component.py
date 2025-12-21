@@ -6,7 +6,7 @@ if TYPE_CHECKING:
 
 class Component(ABC):
     @abstractmethod
-    def apply(self, rocket:Rocket):
+    def apply(self, rocket:Rocket, dt: float):
         pass 
 
     @abstractmethod

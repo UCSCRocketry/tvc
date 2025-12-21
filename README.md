@@ -65,7 +65,7 @@ Stores any useful and specialized math that isn't included in an import.
 *(On a rocket launchpad, X will point directly vertical)*
 
 #### World Reference Frame
-- `+Z` for altitude
+- `+Z down` for altitude (NED coord system)
 
 ---
 

@@ -20,7 +20,7 @@ def disectQ(name: str, quat : qt.quaternion):
     return d
 
 
-class rocket_logger:
+class RocketLogger:
     def __init__(self, rocket: Rocket, filePath: str):
         self.rocket = rocket
         self.path = filePath

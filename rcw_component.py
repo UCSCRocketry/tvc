@@ -1,1 +1,0 @@
-### all of this is out of date with how it's currently implemented. read README and other files to understand.

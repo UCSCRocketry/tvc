@@ -5,7 +5,7 @@ from physics_component import Component
 
 import numpy as np
 from numpy import linalg
-import rocket_math as rmp
+import rocket_math as rkm
 import quaternion as qt
 
 
@@ -29,14 +29,25 @@ class Rocket:
     tau_body: np.ndarray = field(default_factory=lambda: np.zeros(3))
 
     components: list = field(default_factory=list[Component])
-
+    
     global_time: float = 0.0 # time from start of simulation
 
     F_net_world: np.ndarray = field(default_factory=lambda: np.zeros(3))
+    
+    last_dt: float = 0.0
 
     # adds a physics component to the components list
     def addComponent(self, component : Component):
         self.components.append(component)
+    
+    def applyForceBody(self, f_body):
+        self.F_body += f_body
+    def applyForceWorld(self, f_world):
+        self.F_world += f_world
+    def applyTorqueBody(self, tau_body):
+        self.tau_body += tau_body
+    
+
 
 
     #ran each step of the simulation. requires to be sent delta time from previous step in seconds
@@ -50,10 +61,10 @@ class Rocket:
 
         # applies each of the components, which will in turn update the forces and moments acting on the rocket.
         for c in self.components:
-            c.apply(self) 
+            c.apply(self, dt) 
         
         #calculate linear acceleration
-        F_net_world = self.F_world +  self.F_body @ qt.as_rotation_matrix(self.q) 
+        F_net_world = self.F_world +   qt.as_rotation_matrix(self.q) @ self.F_body  
         self.F_net_world = F_net_world
         #v_dot_body = self.F_body / self.m
         v_dot_world = F_net_world/self.m
@@ -76,31 +87,37 @@ class Rocket:
 
         #check if ground elev has been defined and set accordingly
         if self.ground_elev is not None: 
-            if self.x[2] < self.ground_elev:
+            if self.x[2] > self.ground_elev:
                 self.x[2] = self.ground_elev
-                self.v[2] = 0
+                if self.v[2] > 0:
+                    self.v[2] = 0
 
 
         #calculate new orientation
         #calc new quaternion d_q from d_theta and multiply to original quaternion
+        '''
+        i dont know what I was trying to do here im ngl 
+
         w_body_mag = linalg.norm(self.w_body)
-        w_body_norm = self.w_body
+        w_body_norm = self.w_body.copy()
         if w_body_mag > 0:
             w_body_norm /= w_body_mag
+        '''
+        
+        d_theta = self.w_body * dt  
+        #dq = qt.from_euler_angles(d_theta) okay it's clearly not euler angles
+        dq = qt.from_rotation_vector(d_theta)
 
-        
-        d_theta = w_body_norm * dt
-        
         #calculate new body to world quaternion and normalize
         
         # dq_w = np.cos(d_theta / 2.0)
         # dq_r = (self.w / w_norm) * np.sin(d_theta / 2.0)
 
-        dq = qt.from_euler_angles(d_theta)
         self.q = (self.q * dq)
         n = np.abs(self.q)
         if n > 0:
             self.q /= n
 
         self.global_time += dt
+        self.last_dt = dt
         

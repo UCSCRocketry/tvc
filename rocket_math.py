@@ -3,8 +3,13 @@ import numpy as np
 
 #includes any useful functions and classes
 
+def clip(x:float, lo:float, hi:float) -> float:
+    if   lo > x:    return lo
+    elif hi > x:    return hi
+    else:           return x
+
 '''
-lookup_table_2way class
+BidirectionalLookupTable class
 
 stores a lookup table 
 basically an interpolated dictionary
@@ -12,12 +17,16 @@ basically an interpolated dictionary
 can get value from a key and get a key from a value.
 '''
 @dataclass
-class lookup_table_2way:
+class BidirectionalLookupTable:
     def __init__(self, key_value_dict:dict[float, float]):
         self.keys = sorted(key_value_dict.keys())
         self.values = [key_value_dict[key] for key in self.keys]
     
     def get_value(self, key):
+        pass
+    
+    def get_key(self, value):
+        pass
         
 
 '''
