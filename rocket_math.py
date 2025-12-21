@@ -5,7 +5,7 @@ import numpy as np
 
 def clip(x:float, lo:float, hi:float) -> float:
     if   lo > x:    return lo
-    elif hi > x:    return hi
+    elif hi < x:    return hi
     else:           return x
 
 '''

@@ -7,45 +7,75 @@ from components.tvc_component import SimpleMotor, TVCComponent, Null_TVCControll
 from rocket_logger import RocketLogger  
 
 # rocket with 100 meters elevation of mass of 5kg and ground plane of 0 starting at rest
-gravityRocket = Rocket(np.array([0.0,0.0,0.0]), np.array([0.0,0.0,0]), np.array([0.0,0.0,0.0]), np.quaternion(1.0,0.0,0.0,0.0), 5.0, np.identity(3), 0.0)
+initial_orientation = quaternion.quaternion((0.02 + np.sqrt(2)/2),0,np.sqrt(2)/2,0 )
+initial_position = np.zeros(3)
+initial_velocity = np.zeros(3)
+initial_angular_rate = np.zeros(3)
+mass = 1
+inertia_tensor = np.identity(3) * mass
+ground_level = 0.0
+
+rocket = Rocket(initial_position, 
+                initial_velocity, 
+                initial_angular_rate, 
+                initial_orientation, 
+                mass, 
+                inertia_tensor, 
+                ground_level)
+
 # gravity component
 gravity = GravityComponent()
 # applying gravity to rocket
-gravityRocket.addComponent(gravity)
+rocket.addComponent(gravity)
 
 #making simple motor, tvc controller
-simpleMotor = SimpleMotor(100)
-simpleTVCController = Null_TVCController()
+simpleMotor = SimpleMotor(100, 1)
+simpleTVCController = Null_TVCController(position=(0.1, 0.1))
 simpleGimbal = Gimbal((np.pi/2, np.pi/2), (0,0))
 simpleTVCComponent = TVCComponent(simpleMotor, simpleGimbal, simpleTVCController)
 
-gravityRocket.addComponent(simpleTVCComponent)
+rocket.addComponent(simpleTVCComponent)
 
 #making rocketLogger
-rl = RocketLogger(gravityRocket, "rocketlogger/gravityMotorRocket.csv")
+filepath =  "TVC/rocketlogger/gravityRocketInitialVelocity.csv"
+rl = RocketLogger(rocket, filepath)
+#rl2 = RocketLogger(gravityRocket, "rocketlogger/gravityMotorRocketNew.csv")
 
 
-#if this works correctly, it should take 4.515 seconds to land
 dt = 0.01 #set step time
-rocket_pos = []
-record_period = 10 #record every n cycles
+duration = 5 #duration
 ground_hit_time = None
 hit_ground = False
-t = 0
 
 rl.open()
 
-for i in range(0,15000):
+for i in range(0, int(duration/dt)):
     rl.record()
-    if i % record_period == 0:
-        rocket_pos.append(gravityRocket.x)
-    gravityRocket.step(dt)
-    if gravityRocket.x[2] <= 0.0 and not hit_ground:
+    rocket.step(dt)
+    
+    #check ground hit time
+    if rocket.x[2] <= 0.0 and not hit_ground:
         ground_hit_time = dt*i
         hit_ground = True
-    t += dt
+
 
 rl.close()
 
-print(ground_hit_time)
-# running the simulation gives us 4.514 seconds
+
+from rocket_grapher import graph3d
+
+graph3d(
+    filepath,
+    decimate_hz=15,          
+    show_trajectory=True,
+    show_velocity=False,
+    show_force=False,
+    body_axes=("x"),
+    vec_stride=2,              # vectors every n plots
+    body_axes_stride=1,        # body axes every n plots
+    vec_length=2,
+    body_axes_lengths={'x': 3},
+    title="Rocket Flight – World Frame",
+    flip_z=True
+)
+

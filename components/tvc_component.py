@@ -244,12 +244,13 @@ class TVCController(ABC):
 
 #basic tvc controller with no special features
 class Null_TVCController(TVCController):
-    def __init__(self, throttle : float = 1.0):
+    def __init__(self, position = (0.0, 0.0), throttle : float = 1.0):
         self.throttle = 1.0 
+        self.position = position
     
     def get_command(self,rocket,forces, moments,  dt):
 
-        command = TVCCommand(0.0, 0.0, self.throttle)
+        command = TVCCommand(*self.position, self.throttle)
         return command
 
 
