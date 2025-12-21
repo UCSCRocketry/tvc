@@ -53,6 +53,9 @@ for i in range(0, int(duration/dt)):
     rl.record()
     rocket.step(dt)
     
+    if dt*i*1000%10 == 0:
+        print("running:", i*dt, 'seconds')
+
     #check ground hit time
     if rocket.x[2] <= 0.0 and not hit_ground:
         ground_hit_time = dt*i

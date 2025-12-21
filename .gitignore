@@ -1,0 +1,7 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local logs / data dumps
+rocketlogger/
+*.csv
