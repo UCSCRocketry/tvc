@@ -1,13 +1,16 @@
 import numpy as np
-import quaternion
-
+import quaternion as qt
+from rocket_math import PID
 from rocket import Rocket
 from components.gravity_component import GravityComponent
 from components.tvc_component import SimpleMotor, TVCComponent, Null_TVCController, Gimbal
+import components.tvc_controllers as tvc_controllers
 from rocket_logger import RocketLogger  
 
+
 # rocket with 100 meters elevation of mass of 5kg and ground plane of 0 starting at rest
-initial_orientation = quaternion.quaternion((0.02 + np.sqrt(2)/2),0,np.sqrt(2)/2,0 )
+pitch = np.deg2rad(20) # 20 degrees launch rail
+initial_orientation =  qt.from_rotation_vector([0.0, np.pi/2 + pitch, 0.0])
 initial_position = np.zeros(3)
 initial_velocity = np.zeros(3)
 initial_angular_rate = np.zeros(3)
@@ -29,10 +32,20 @@ gravity = GravityComponent()
 rocket.addComponent(gravity)
 
 #making simple motor, tvc controller
-simpleMotor = SimpleMotor(100, 1)
-simpleTVCController = Null_TVCController(position=(0.1, 0.1))
+simpleMotor = SimpleMotor(thrust=100)
+
+nullTVCController = Null_TVCController(position=(0.05, 0.05))
+
+Kp = 6.0
+Kd = 2.0
+Ki = 0.0
+pidy = PID(Kp, Ki, Kd)
+pidz = PID(Kp, Ki, Kd)
+
+simplePIDController = tvc_controllers.SimplePIDController(pid_y=pidy, pid_z=pidz)
+
 simpleGimbal = Gimbal((np.pi/2, np.pi/2), (0,0))
-simpleTVCComponent = TVCComponent(simpleMotor, simpleGimbal, simpleTVCController)
+simpleTVCComponent = TVCComponent(simpleMotor, simpleGimbal, nullTVCController)
 
 rocket.addComponent(simpleTVCComponent)
 
@@ -42,13 +55,14 @@ rl = RocketLogger(rocket, filepath)
 #rl2 = RocketLogger(gravityRocket, "rocketlogger/gravityMotorRocketNew.csv")
 
 
-dt = 0.01 #set step time
-duration = 5 #duration
+dt = 0.002 #set step time
+duration = 4 #duration
 ground_hit_time = None
 hit_ground = False
 
 rl.open()
 
+print("running sim!")
 for i in range(0, int(duration/dt)):
     rl.record()
     rocket.step(dt)
@@ -61,7 +75,7 @@ for i in range(0, int(duration/dt)):
         ground_hit_time = dt*i
         hit_ground = True
 
-
+print("sim done!")
 rl.close()
 
 
@@ -75,10 +89,10 @@ graph3d(
     show_force=False,
     body_axes=("x"),
     vec_stride=2,              # vectors every n plots
-    body_axes_stride=1,        # body axes every n plots
+    body_axes_stride=5,        # body axes every n plots
     vec_length=2,
-    body_axes_lengths={'x': 3},
+    body_axes_lengths={'x': 9},
     title="Rocket Flight – World Frame",
     flip_z=True
 )
-
+print("plotting done!")
