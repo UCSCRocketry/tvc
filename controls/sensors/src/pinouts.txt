@@ -1,0 +1,43 @@
+
+- component pin - teensy pin (number)
+
+Adafruit BNO055 (i2c communication)
+- Vin - 3.3V-5V  
+- 3V - do not connect
+- SCL - SCL (19)
+- SDA - SDA (18)
+
+Adafruit BMP388 (i2c communication)
+- VIN - 3.3V-5V
+- 3Vo - do not connection
+- SCK - SCL (19)
+- SDA - SDA (18)
+
+ESP32-C3 (does this have enough range?) (SPI communication)
+- MOSI - MOSI (11)
+- MISO - MISI (12)
+- SCK - SCK (13)
+- CS - CS (10)
+
+GPS 7m  (uart communication)
+- TX - RX1 (0)
+- RX - TX1 (1)
+- vin - 3-5v 
+
+Lidar (i2c) 
+- TXD/SCL - SCL (19)
+- RXD/SDA - SDA (18)
+- 5V - 5V 
+
+Servo1
+- power - 4.8V-6.8V
+- PWM signal - PWM pin (2)
+
+Servo2
+- power - 4.8V-6.8V
+- PWM signal - PWM pin (3)
+
+
+ESC 
+- power - I don't know
+- pwm signal - PWM pin (4)
