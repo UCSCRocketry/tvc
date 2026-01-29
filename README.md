@@ -1,5 +1,5 @@
 # tvc
-New TVC repo for Fall 2025
+New TVC repo for 2025-2026
 
 Please follow the below guildlines before making changes
 
