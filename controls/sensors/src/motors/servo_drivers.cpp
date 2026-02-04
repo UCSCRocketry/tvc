@@ -51,3 +51,18 @@ Gimbal::Gimbal(Servo_Axis y_axis, Servo_Axis z_axis) :
     axis_y(y_axis),
     axis_z(z_axis)
     {}
+
+void Gimbal::set_angles(float angle_y_rads, float angle_z_rads){
+    axis_y.set_axis_angle(angle_y_rads);
+    axis_z.set_axis_angle(angle_z_rads);
+}
+
+void Gimbal::drive_servos(){
+    axis_y.drive_servo();
+    axis_z.drive_servo();
+}
+
+void Gimbal::drive_servos(float angle_y_rads, float angle_z_rads){
+    set_angles(angle_y_rads, angle_z_rads);
+    drive_servos();
+}
