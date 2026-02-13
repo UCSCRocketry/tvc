@@ -2,6 +2,7 @@
 
 #include "arm_math.h"
 #include "matrix.h"
+#include "lqr.h"
 
 #include <memory>
 
