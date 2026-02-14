@@ -14,7 +14,7 @@ public:
 
   template <int R, int C> friend class Matrix;
 
-  Matrix(float32_t data[kDataSize])
+  Matrix(const float32_t data[kDataSize])
       : matrix_instance_{Rows, Cols, matrix_data_} {
     std::copy(data, data + kDataSize, matrix_data_);
   }
@@ -90,6 +90,18 @@ public:
     return out;
   }
 
+  friend Matrix operator*(const float32_t rhs, const Matrix &lhs) {
+    return lhs * rhs;
+  }
+
+  Matrix<Rows, Cols> operator/(const float32_t scalar) const {
+    Matrix<Rows, Cols> out;
+
+    arm_mat_scale_f32(&matrix_instance_, 1.0f / scalar, &out.matrix_instance_);
+
+    return out;
+  }
+
   Matrix<Cols, Rows> transpose() const {
     Matrix<Cols, Rows> result;
 
@@ -103,6 +115,15 @@ public:
 
     arm_mat_inverse_f32(&matrix_instance_, &result.matrix_instance_);
 
+    return result;
+  }
+
+  float32_t norm() const {
+    static_assert(Cols == 1, "Euclidian norm only defined for vectors");
+
+    float32_t result = 0;
+    // We const cast because the version of cmsis we're using doesn't have a const here.
+    arm_rms_f32(const_cast<float32_t *>(matrix_data_), Rows, &result);
     return result;
   }
 

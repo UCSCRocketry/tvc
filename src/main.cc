@@ -1,8 +1,7 @@
 #include <Arduino.h>
 
-#include "arm_math.h"
 #include "matrix.h"
-#include "lqr.h"
+#include "lie.h"
 
 #include <memory>
 
