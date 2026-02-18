@@ -27,6 +27,8 @@ class Quaternion {
     // Applies the rotation of the quaternion to a vector p
     Matrix<3, 1> apply(const Matrix<3, 1> &p) const;
 
+    static Quaternion from_zyx(float32_t roll, float32_t pitch, float32_t yaw);
+
   protected:
     float32_t quat_[4];
 };

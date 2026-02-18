@@ -91,3 +91,20 @@ Matrix<3, 1> Quaternion::apply(const Matrix<3, 1> &p) const {
 
   return p + Matrix<3, 1>::cross(2 * v, Matrix<3, 1>::cross(v, p) + w * p);
 }
+
+Quaternion Quaternion::from_zyx(float32_t roll, float32_t pitch, float32_t yaw) {
+  const float32_t cx = cos(roll/2.0);
+  const float32_t cy = cos(pitch/2.0);
+  const float32_t cz = cos(yaw/2.0);
+
+  const float32_t sx = sin(roll/2.0);
+  const float32_t sy = sin(pitch/2.0);
+  const float32_t sz = sin(yaw/2.0);
+
+  const float32_t w = cx * cy * cz + sx * sy * sz;
+  const float32_t x = sx * cy * cz - cx * sy * sz;
+  const float32_t y = cx * sy * cz + sx * cy * sz;
+  const float32_t z = cx * cy * sz - sx * sy * cz;
+
+  return Quaternion(Matrix<3, 1>({x, y, z}), w);
+}

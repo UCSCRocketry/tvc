@@ -102,6 +102,12 @@ public:
     return out;
   }
 
+  float32_t operator[](uint32_t i) {
+    static_assert(Cols == 1, "[] operator only defined for column vector");
+
+    return at(i, 0);
+  }
+
   Matrix<Cols, Rows> transpose() const {
     Matrix<Cols, Rows> result;
 
