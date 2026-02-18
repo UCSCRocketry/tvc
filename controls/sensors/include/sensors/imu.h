@@ -7,6 +7,9 @@
 #include <Adafruit_BNO055.h>
 #include <Adafruit_Sensor.h>
 
+using Vector3 = imu::Vector<3>;
+using Quaternion = imu::Quaternion; 
+
 class BNO055_IMU {
 public:
     BNO055_IMU(int i2cAddress = BNO055_ADDRESS_A, TwoWire *wire = &Wire);
