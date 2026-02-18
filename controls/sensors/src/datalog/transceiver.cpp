@@ -1,3 +1,4 @@
+// Read https://nrf24.github.io/RF24/examples_2GettingStarted_2GettingStarted_8ino-example.html
 #include <Arduino.h>
 #include <SPI.h>
 #include <RF24.h>
