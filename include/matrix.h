@@ -126,6 +126,19 @@ public:
     arm_rms_f32(const_cast<float32_t *>(matrix_data_), Rows, &result);
     return result;
   }
+  
+  // Matrix cross product which is only valid for 3, 1 matrices.
+  static Matrix<3, 1> cross(Matrix<3, 1> a, Matrix<3, 1> b) {
+    const float32_t a1 = a.at(0, 0);
+    const float32_t a2 = a.at(1, 0);
+    const float32_t a3 = a.at(2, 0);
+
+    const float32_t b1 = b.at(0, 0);
+    const float32_t b2 = b.at(1, 0);
+    const float32_t b3 = b.at(2, 0);
+
+    return Matrix<3, 1>({a2 * b3 - a3 * b2, a3 * b1 - a1 * b3, a1 * b2 - a2 * b1});
+  }
 
   constexpr inline void set(int i, int j, float32_t data) {
     matrix_data_[i * Cols + j] = data;

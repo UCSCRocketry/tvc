@@ -23,6 +23,9 @@ class Quaternion {
 
     // Returns the vector part of the quaternion
     const Matrix<3, 1> vector() const;
+    
+    // Applies the rotation of the quaternion to a vector p
+    Matrix<3, 1> apply(const Matrix<3, 1> &p) const;
 
   protected:
     float32_t quat_[4];

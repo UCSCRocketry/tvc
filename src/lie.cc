@@ -82,3 +82,12 @@ float32_t Quaternion::scalar() const {
 const Matrix<3, 1> Quaternion::vector() const {
   return Matrix<3, 1>(quat_);
 }
+
+// Implements the second algorithm in "Used methods"
+// https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
+Matrix<3, 1> Quaternion::apply(const Matrix<3, 1> &p) const {
+  const Matrix<3, 1> v = vector();
+  const float32_t w = scalar();
+
+  return p + Matrix<3, 1>::cross(2 * v, Matrix<3, 1>::cross(v, p) + w * p);
+}
