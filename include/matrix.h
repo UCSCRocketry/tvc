@@ -35,6 +35,12 @@ public:
     return *this;
   }
 
+  template <int Row = Rows, int Col = Cols, 
+              typename = typename std::enable_if<Row == 1 && Col == 1>::type>
+    operator float() const {
+        return matrix_data_[0];
+    }
+
   static constexpr Matrix Zero() {
     Matrix matrix{};
     std::fill(matrix.matrix_data_, matrix.matrix_data_ + kDataSize, 0.0f);

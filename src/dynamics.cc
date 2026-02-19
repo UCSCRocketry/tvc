@@ -14,13 +14,13 @@ Dynamics::Dynamics(Dynamics::DynamicsConstants constants):
   constants_(constants) {}
 
 State Dynamics::f(State X, Input U) {
-  const Matrix<3, 1> lift_prop{0.0, 0.0, prop_thrust(U[Inputs::kWProp])};
+  const Matrix<3, 1> lift_prop({0.0, 0.0, prop_thrust(U[Inputs::kWProp])});
 
   Quaternion prop_body_quat = Quaternion::from_zyx(0.0, U[Inputs::kTheta], U[Inputs::kPsi]);
   
   auto lift_body = prop_body_quat.apply(lift_prop);
 
-  const Matrix<3, 1> r{0.0, 0.0, constants_.r};
+  const Matrix<3, 1> r({0.0, 0.0, constants_.r});
 
   // T = Matrix<3,1>::cross(r, lift_body) + U[Inputs::kTrw] + Matrix<3, 1>{0.0, 0.0, self.prop_torque()};
 }

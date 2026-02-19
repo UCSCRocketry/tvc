@@ -108,3 +108,15 @@ Quaternion Quaternion::from_zyx(float32_t roll, float32_t pitch, float32_t yaw) 
 
   return Quaternion(Matrix<3, 1>({x, y, z}), w);
 }
+
+Quaternion Quaternion::compose(Quaternion a, Quaternion b) {
+  const float32_t aw = a.scalar();
+  const float32_t bw = b.scalar();
+  
+  auto a_v = a.vector();
+  auto b_v = b.vector();
+
+  auto vector = aw * b_v + bw * a_v + Matrix<3,1>::cross(a_v, b_v);
+
+  return Quaternion(vector, aw * bw - a_v.transpose() * b_v);
+}

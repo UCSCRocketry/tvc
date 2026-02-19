@@ -29,6 +29,9 @@ class Quaternion {
 
     static Quaternion from_zyx(float32_t roll, float32_t pitch, float32_t yaw);
 
+    // Quaternion composition aka the quaternion product
+    static Quaternion compose(Quaternion a, Quaternion b);
+
   protected:
     float32_t quat_[4];
 };
