@@ -18,13 +18,3 @@ void GPS::update(){
     gps.read();
 }
 
-float GPS::get_latitude(){
-    return gps;
-}
-
-float GPS::get_longitude(){
-    return gps.longitudeDegrees * DEG_TO_RAD;
-}
-
-
-

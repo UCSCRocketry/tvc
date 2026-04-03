@@ -88,6 +88,9 @@ void loop(void)
   Serial.print(" Z="); Serial.print(gyro.z());
   Serial.print(" | Quaternion: W="); Serial.print(quat.w());
   Serial.print(" altitude (m): "); Serial.print(altitude);
+  Serial.print(" | Pressure (hPa): "); Serial.print(pressure);
+  Serial.print(" altitude (m): "); Serial.print(altitude);
+  Serial.print(" calibration status:"); Serial.print(bno.getCalibrationStatus());
   Serial.println();
   
 
