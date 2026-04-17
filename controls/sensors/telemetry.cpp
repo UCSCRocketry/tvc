@@ -3,50 +3,65 @@
 #include <RF24.h>
 #include <SD.h>
 
-// NRF24L01+ Pin Setup for Teensy 4.1
-RF24 radio(9, 10); // CE, CSN pins
+// pins for Teensy 4.1 & NRF24
+RF24 radio(9, 10); 
 const byte address[6] = "00001";
 
-// structure to organize data for transmission
+// full Telemetry Structure based on Project Tracker BOM 
 struct TelemetryPacket {
     uint32_t timestamp;
-    float altitude;
-    float velocity;
+    float altitude;    // BMP3XX 
+    float temperature; // BMP3XX 
+    float pitch;       // BNO055 IMU 
+    float roll;        // BNO055 IMU 
+    float latitude;    // GPS 
+    float longitude;   // GPS 
 };
 
-TelemetryPacket data;
+TelemetryPacket packet;
 
 void setup() {
     Serial.begin(115200);
-
-    // initialize built-in SD card on Teensy 4.1
+    
+    // Initialize SD for CSV logging
     if (!SD.begin(BUILTIN_SDCARD)) {
-        Serial.println("SD initialization failed!");
+        Serial.println("SD card failed!");
     }
 
     // Initialize Radio
     radio.begin();
     radio.openWritingPipe(address);
-    radio.setPALevel(RF24_PA_MAX); // Maximum power for range
-    radio.stopListening();         // Set as transmitter
+    radio.setPALevel(RF24_PA_MAX);
+    radio.stopListening();
 }
 
 void loop() {
-    // fill data structure (replace with actual sensor reads later)
-    data.timestamp = millis();
-    data.altitude = 150.0; 
+    // hardcoded sensor data
+    // will be replacing these with actual sensor.read() calls later
+    packet.timestamp = millis();
+    packet.altitude = 1250.5;   // Simulated altitude (m)
+    packet.temperature = 22.4;  // Simulated temp (C)
+    packet.pitch = 5.2;         // Simulated tilt
+    packet.roll = 1.1;
+    packet.latitude = 36.9741;  // UCSC Latitude
+    packet.longitude = -122.0308; // UCSC Longitude
 
-    // 1. log to CSV file
-    File logger = SD.open("flight_data.csv", FILE_WRITE);
-    if (logger) {
-        logger.print(data.timestamp);
-        logger.print(",");
-        logger.println(data.altitude);
-        logger.close();
+    // 1. log to CSV
+    File dataFile = SD.open("flight.csv", FILE_WRITE);
+    if (dataFile) {
+        dataFile.print(packet.timestamp); dataFile.print(",");
+        dataFile.print(packet.altitude);  dataFile.print(",");
+        dataFile.print(packet.pitch);     dataFile.print(",");
+        dataFile.println(packet.latitude);
+        dataFile.close();
     }
 
-    // 2. transmit via NRF24L01+
-    radio.write(&data, sizeof(TelemetryPacket));
+    // 2. broadcast via NRF24L01+
+    bool success = radio.write(&packet, sizeof(TelemetryPacket));
+    
+    if (success) {
+        Serial.println("Packet sent successfully");
+    }
 
     delay(100); // 10Hz transmission rate
 }
