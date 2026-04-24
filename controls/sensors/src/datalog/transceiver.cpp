@@ -68,23 +68,26 @@ void rxInit() {
 
 // Send telemetry from rocket. Returns true if ACK received.
 // TODO: update fields as needed
-bool sendTelemetry(float altitude) {
-    Telemetry t;
+bool sendTelemetry(Telemetry& t) {
     t.seq = ++txSeq;
-    t.altitude = altitude;
-    t.ms = (uint32_t)millis();
+    t.ms  = (uint32_t)millis();
 
-    // stopListening() ensures writing
     radio.stopListening();
     bool ok = radio.write(&t, sizeof(t));
     // resume listening if needed
     // radio.startListening(); // Uncomment if switching back to RX mode
 
+
     // Append to log file if open
     if (logFile) {
         logFile.print(t.seq); logFile.print(",");
+        logFile.print(t.ms); logFile.print(",");
         logFile.print(t.altitude, 3); logFile.print(",");
-        logFile.println(t.ms);
+        logFile.print(t.temperature, 2); logFile.print(",");
+        logFile.print(t.pitch, 3); logFile.print(",");
+        logFile.print(t.roll, 3); logFile.print(",");
+        logFile.print(t.latitude, 6); logFile.print(",");
+        logFile.println(t.longitude, 6);
         logFile.flush();
     }
 
@@ -94,15 +97,20 @@ bool sendTelemetry(float altitude) {
 // Call frequently on ground (receiver) Teensy loop() to process incoming packets.
 // Print to Serial if packet arrives.
 // TODO: update fields as needed
-void processIncoming() {
+void processIncomingTelemetry() {
     if (!radio.available()) return;
 
     Telemetry t;
     while (radio.available()) {
         radio.read(&t, sizeof(t));
-        Serial.print(t.seq); Serial.print(", ");
-        Serial.print(t.altitude, 3); Serial.print(", ");
-        Serial.println(t.ms);
+        Serial.print("seq="); Serial.print(t.seq);
+        Serial.print(" ms="); Serial.print(t.ms);
+        Serial.print(" alt="); Serial.print(t.altitude, 3);
+        Serial.print(" temp="); Serial.print(t.temperature, 2);
+        Serial.print(" pitch="); Serial.print(t.pitch, 3);
+        Serial.print(" roll="); Serial.print(t.roll, 3);
+        Serial.print(" lat="); Serial.print(t.latitude, 6);
+        Serial.print(" lon="); Serial.println(t.longitude, 6);
     }
 }
 

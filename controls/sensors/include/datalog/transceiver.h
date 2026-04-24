@@ -20,12 +20,17 @@ struct Telemetry {
     uint32_t seq;
     float altitude;
     uint32_t ms; // Time in milliseconds
+    float temperature;
+    float pitch;
+    float roll;
+    float latitude;
+    float longitude;
 } __attribute__((packed));
 
 void txInit(unsigned long retries = 3, unsigned long delayCycles = 5);
 void rxInit();
-bool sendTelemetry(float altitude);
-void processIncomingTelemetry();
+bool sendTelemetry(Telemetry& t);
+void processIncoming();
 void closeLogFile();
 
 #endif 
