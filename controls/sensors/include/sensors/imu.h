@@ -21,6 +21,8 @@ public:
     imu::Vector<3> getAccel();
     imu::Vector<3> getMagnetometer();
     imu::Vector<3> getLinearAccel();
+    imu::Vector<3> getEuler();
+    int8_t getCalibrationStatus();
 
 private:
     Adafruit_BNO055 bno;

@@ -1,5 +1,6 @@
 #include "motors/servo_drivers.h"
 #include "config.h"
+#include <Servo.h>
 #include <Arduino.h>
 
 #define DEFAULT_MINPOINT_US 500
@@ -54,6 +55,7 @@ void Servo_Axis::drive_servo(){
     // map the current_servo_angle_rads to pulse width
     float us_per_rads = float(maxpoint_us - minpoint_us ) / servo_range_rads;
     int pulse_width_us = int(minpoint_us + (current_servo_angle_rads) * us_per_rads);
+    Serial.println("Servo angle (rads): " + String(current_servo_angle_rads) + " Pulse width (us): " + String(pulse_width_us));
     servo.writeMicroseconds(pulse_width_us);
 }
 

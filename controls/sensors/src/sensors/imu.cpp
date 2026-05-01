@@ -30,6 +30,10 @@ imu::Quaternion BNO055_IMU::getQuaternion() {
     return bno.getQuat();
 }
 
+imu::Vector<3> BNO055_IMU::getEuler() {
+    return bno.getVector(Adafruit_BNO055::VECTOR_EULER);
+}
+
 imu::Vector<3> BNO055_IMU::getGyro() {
     return bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
 }
@@ -46,3 +50,8 @@ imu::Vector<3> BNO055_IMU::getLinearAccel() {
     return bno.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
 }
 
+int8_t BNO055_IMU::getCalibrationStatus() {
+    uint8_t sys, gyro, accel, mag;
+    bno.getCalibration(&sys, &gyro, &accel, &mag);
+    return sys; // return system calibration status (0-3)
+}

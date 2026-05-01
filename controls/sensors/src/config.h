@@ -31,6 +31,9 @@
 // environmental setup:
 #define SEA_LEVEL_PRESSURE_HPA (1013.25) // local sea level pressure
 
+// gps settings 
+#define GPS_SERIAL Serial1
+
 
 
 
