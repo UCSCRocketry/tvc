@@ -6,7 +6,7 @@
 
 // pins for Teensy 4.1 & NRF24
 RF24 radio(9, 10); 
-const byte address[6] = "00001";
+const byte address[6] = "00001"; 
 
 // full Telemetry Structure based on Project Tracker BOM 
 struct TelemetryPacket {

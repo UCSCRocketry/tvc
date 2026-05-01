@@ -21,7 +21,9 @@ List of sensors:
 
 BNO055_IMU bno(BNO055_I2C_ADDRESS, BNO055_WIRE); // use BNO055_ADDRESS_B if A doesn't work
 BMP388_Barometer bmp(BMP388_I2C_ADDRESS, BMP388_WIRE);
-GPS gps(GPS_SERIAL);
+
+// Fixed: Initialize GPS with Hardware Serial 1 (Serial1 on Pins 0/1) instead of the undefined macro
+GPS gps(Serial1, 9600);
 
 
 Servo_Axis servo_y(SERVO_PIN_Y);
@@ -41,10 +43,12 @@ void setup(void)
   Serial.println("Initializing sensors...");
   
 
-
   // sensor setups
   bno.setup();
   bmp.setup();
+  
+  // Initialize GPS Setup
+  gps.setup();
 
   // //servo wiggle
   // Serial.println("Wiggling servos...");
@@ -71,6 +75,9 @@ void setup(void)
 
 void loop(void)
 {
+  // Update GPS
+  gps.update();
+
   Vector3 accel = bno.getAccel();
   Vector3 gyro = bno.getGyro();
   Vector3 mag = bno.getMagnetometer();
@@ -80,6 +87,10 @@ void loop(void)
   float pressure = bmp.getPressure();
   float altitude = bmp.getAltitude();
 
+  // Add GPS data to the Serial print
+  float gpsLat = gps.get_latitude();
+  float gpsAlt = gps.get_altitude_meters();
+
   Serial.print("Accel (m/s^2): X="); Serial.print(accel.x());
   Serial.print(" Y="); Serial.print(accel.y());
   Serial.print(" Z="); Serial.print(accel.z());
@@ -88,9 +99,9 @@ void loop(void)
   Serial.print(" Z="); Serial.print(gyro.z());
   Serial.print(" | Quaternion: W="); Serial.print(quat.w());
   Serial.print(" altitude (m): "); Serial.print(altitude);
+  Serial.print(" | GPS Lat: "); Serial.print(gpsLat, 6);
   Serial.println();
   
-
 
   delay(1000); //delay for readability
 }

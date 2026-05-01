@@ -19,8 +19,7 @@ void GPS::update() {
 }
 
 float GPS::get_latitude() {
-    // Return latitudeDegrees from the Adafruit_GPS instance
-    return gps.latitudeDegrees; 
+    return gps.latitudeDegrees;
 }
 
 float GPS::get_longitude() {
@@ -37,6 +36,7 @@ void GPS::set_origin(float latitude, float longitude, float altitude) {
     origin_alt = altitude;
 }
 
+// Placeholder for your math logic
 float GPS::get_dist_origin_meter() { return 0.0; }
 float GPS::get_bearing_origin_rad() { return 0.0; }
 
