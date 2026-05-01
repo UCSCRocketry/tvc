@@ -2,11 +2,7 @@
 #include <SPI.h>
 #include <RF24.h>
 #include <SD.h>
-
-// Hardware pins. Change to match board.
-#define CE_PIN   7
-#define CSN_PIN  8
-#define SD_CS_PIN 10
+#include "../include/datalog/transceiver.h"
 
 // Unique pipe/address (5 byte address or 64 bits). Same on both boards.
 const uint64_t RADIO_PIPE = 0xE8E8F0F0E1LL;
@@ -18,13 +14,6 @@ RF24 radio(CE_PIN, CSN_PIN);
 static File logFile;
 static char logFilename[24];
 
-// Telemetry packet (packed)
-// Add fields as needed
-struct Telemetry {
-    uint32_t seq;
-    float altitude;
-    uint32_t ms; // Time in milliseconds
-} __attribute__((packed));
 
 static uint32_t txSeq = 0; // Transmission sequence number
 
@@ -39,22 +28,22 @@ void txInit(unsigned long retries = 3, unsigned long delayCycles = 5) {
 
 
     // Initialize SD card and open log file
-    if (!SD.begin(SD_CS_PIN)) {
-        Serial.println("SD card initialization failed!");
-    } else {
-        snprintf(logFilename, sizeof(logFilename), "LOG%lu.CSV", millis());
-        logFile = SD.open(logFilename, FILE_WRITE);
-        if (!logFile) {
-            Serial.println("Failed to open log file!");
-        } else {
-            // If file is new, write CSV header
-            if (logFile.size() == 0) {
-                logFile.println("seq,altitude,ms\n");
-                logFile.flush();
-            }
-            Serial.print("Logging to: "); Serial.println(logFilename);
-        }
-    }
+    //if (!SD.begin(SD_CS_PIN)) {
+    //    Serial.println("SD card initialization failed!");
+    //} else {
+    //    snprintf(logFilename, sizeof(logFilename), "LOG%lu.CSV", millis());
+    //    logFile = SD.open(logFilename, FILE_WRITE);
+    //    if (!logFile) {
+    //        Serial.println("Failed to open log file!");
+    //    } else {
+    //        // If file is new, write CSV header
+    //        if (logFile.size() == 0) {
+    //            logFile.println("seq,altitude,ms\n");
+    //            logFile.flush();
+    //        }
+    //        Serial.print("Logging to: "); Serial.println(logFilename);
+    //    }
+    //}
 }
 
 // Call this on the ground (receiver) Teensy on setup()

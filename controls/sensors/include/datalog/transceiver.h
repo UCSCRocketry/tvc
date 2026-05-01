@@ -4,9 +4,9 @@
 #include <Arduino.h>
 
 // Hardware pins. Change to match board.
-#define CE_PIN   7
-#define CSN_PIN  8
-#define SD_CS_PIN 10
+#define CE_PIN   9
+#define CSN_PIN  10
+//#define SD_CS_PIN 10
 
 // Unique pipe/address (5 byte address or 64 bits). Same on both boards.
 extern const uint64_t RADIO_PIPE;
@@ -30,7 +30,7 @@ struct Telemetry {
 void txInit(unsigned long retries = 3, unsigned long delayCycles = 5);
 void rxInit();
 bool sendTelemetry(Telemetry& t);
-void processIncoming();
+void processIncomingTelemetry();
 void closeLogFile();
 
 #endif 
