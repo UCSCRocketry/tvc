@@ -2,6 +2,7 @@
 #include <SPI.h>
 #include <RF24.h>
 #include <SD.h>
+#include <SdFatConfig.h>
 
 // pins for Teensy 4.1 & NRF24
 RF24 radio(9, 10); 
