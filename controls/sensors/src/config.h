@@ -2,9 +2,18 @@
 #define CONFIG_H
 
 // useful constants
+#ifndef PI
 #define PI 3.14159265358979323846
+#endif
+
+#ifndef DEG_TO_RAD
 #define DEG_TO_RAD (PI / 180.0)
+#endif
+
+#ifndef RAD_TO_DEG
 #define RAD_TO_DEG (180.0 / PI)
+#endif
+
 #define GRAVITY 9.80665 // m/s^2
 
 // hardware setup: 
@@ -30,10 +39,5 @@
 
 // environmental setup:
 #define SEA_LEVEL_PRESSURE_HPA (1013.25) // local sea level pressure
-
-
-
-
-
 
 #endif
