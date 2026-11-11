@@ -1,0 +1,12 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "BMP585") (type "KiCad") (uri "C:/Users/gamer/Downloads/ul_BMP585/KiCADv6") (options "") (descr ""))
+	(lib (name "BNO085 chip") (type "KiCad") (uri "C:/Users/gamer/Downloads/ul_BNO085/KiCADv6") (options "") (descr "") (disabled))
+	(lib (name "BNO085") (type "KiCad") (uri "C:/Users/gamer/Downloads/4754") (options "") (descr ""))
+	(lib (name "Teensy 4.1") (type "KiCad") (uri "C:/Users/gamer/Downloads/TEENSY_4.1") (options "") (descr ""))
+	(lib (name "Matek_SVPDB") (type "KiCad") (uri "${KIPRJMOD}/Matek_SVPDB.kicad_sym") (options "") (descr ""))
+	(lib (name "Hiwonder_Servos") (type "KiCad") (uri "${KIPRJMOD}/Hiwonder_Servos.kicad_sym") (options "") (descr ""))
+	(lib (name "Flycolor_ESC") (type "KiCad") (uri "${KIPRJMOD}/Flycolor_ESC.kicad_sym") (options "") (descr ""))
+	(lib (name "CRM_Motors") (type "KiCad") (uri "${KIPRJMOD}/CRM_Motors.kicad_sym") (options "") (descr ""))
+	(lib (name "CaptainRC_PDB") (type "KiCad") (uri "${KIPRJMOD}/CaptainRC_PDB.kicad_sym") (options "") (descr ""))
+)
