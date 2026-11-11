@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "a798a51d-d61d-4853-9d81-ac081bd58fab")
-	(paper "A4")
+	(paper "C")
 	(title_block
 		(title "Rocket Team Hopper")
 		(rev "V1.00")
@@ -16,14 +16,16 @@
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "U"
-				(at 0.254 11.684 0)
+			(property "Reference" "U1"
+				(at 13.97 -1.9021 0)
 				(show_name no)
 				(do_not_autoplace no)
+				(hide yes)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
 			(property "Value" ""
@@ -71,20 +73,20 @@
 			)
 			(symbol "BMP585_Breakout_Board_0_1"
 				(rectangle
-					(start -11.43 7.62)
-					(end 10.16 -13.97)
+					(start -10.795 10.795)
+					(end 10.795 -10.795)
 					(stroke
 						(width 0)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
 			)
 			(symbol "BMP585_Breakout_Board_1_1"
-				(text "BMP585 Breakout Board"
-					(at -0.254 9.144 0)
+				(text "BMP585"
+					(at -0.254 0.762 0)
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -92,61 +94,7 @@
 					)
 				)
 				(pin input line
-					(at 10.16 6.35 0)
-					(length 2.54)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 10.16 3.81 0)
-					(length 2.54)
-					(name "3Vo"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 10.16 0 0)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 10.16 -3.81 0)
+					(at -12.7 6.35 0)
 					(length 2.54)
 					(name "SCL"
 						(effects
@@ -164,7 +112,7 @@
 					)
 				)
 				(pin input line
-					(at 10.16 -6.35 0)
+					(at -12.7 2.54 0)
 					(length 2.54)
 					(name "SDO"
 						(effects
@@ -181,8 +129,8 @@
 						)
 					)
 				)
-				(pin input line
-					(at 10.16 -8.89 0)
+				(pin bidirectional line
+					(at -12.7 -1.27 0)
 					(length 2.54)
 					(name "SDA"
 						(effects
@@ -200,7 +148,7 @@
 					)
 				)
 				(pin input line
-					(at 10.16 -11.43 0)
+					(at -12.7 -5.08 0)
 					(length 2.54)
 					(name "CS"
 						(effects
@@ -218,7 +166,61 @@
 					)
 				)
 				(pin input line
-					(at 10.16 -13.97 0)
+					(at -1.27 12.7 270)
+					(length 2.54)
+					(name "VIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -1.27 -12.7 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 2.54 -12.7 90)
+					(length 2.54)
+					(name "3Vo"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 12.7 0 180)
 					(length 2.54)
 					(name "INT"
 						(effects
@@ -3541,227 +3543,89 @@
 			(embedded_fonts no)
 		)
 	)
-	(junction
-		(at 156.21 148.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "05f0a9c1-bde1-488c-b9c2-9387305a0b3c")
-	)
-	(junction
-		(at 198.12 144.78)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9e1a76da-2135-465d-9c73-b6112b24aa9f")
-	)
-	(junction
-		(at 157.48 148.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c2fa92ec-7677-474f-9968-2eac5d6ff94d")
-	)
 	(wire
 		(pts
-			(xy 157.48 151.13) (xy 156.21 151.13)
+			(xy 146.05 88.9) (xy 149.86 88.9)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1e8d9708-a335-483e-8d29-b28c53105e5d")
+		(uuid "05a885da-a341-4155-b78c-2cfe9f6ddeb9")
 	)
 	(wire
 		(pts
-			(xy 156.21 157.48) (xy 196.85 157.48)
+			(xy 146.05 96.52) (xy 149.86 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "26b55487-62a8-454f-987a-76793ca7b232")
+		(uuid "453c09fe-ca8b-4e03-b5dd-2841a456cbdf")
 	)
 	(wire
 		(pts
-			(xy 153.67 148.59) (xy 156.21 148.59)
+			(xy 270.51 264.16) (xy 279.4 264.16)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2f68be05-36e3-4b70-bd9f-8324922bed0d")
+		(uuid "6e8eb2bf-2b48-4095-bb83-498c6f415855")
 	)
 	(wire
 		(pts
-			(xy 201.93 161.29) (xy 201.93 146.05)
+			(xy 270.51 261.62) (xy 279.4 261.62)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3382f203-2105-4975-acf0-00327a9ddec4")
+		(uuid "9aac9796-8fbe-42bd-aaab-1ad690170ce4")
 	)
-	(wire
-		(pts
-			(xy 153.67 161.29) (xy 201.93 161.29)
+	(label "bmp_scl"
+		(at 270.51 264.16 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a804f9a-1631-4f71-8f90-150cd8467f5e")
+		(uuid "038695d9-c714-4968-b4fc-44f5cd805778")
 	)
-	(wire
-		(pts
-			(xy 196.85 144.78) (xy 198.12 144.78)
+	(label "bmp_sda"
+		(at 270.51 261.62 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ceec1c6-f8a9-4d4f-af3e-8fff30312424")
+		(uuid "90274651-3497-4335-ad4e-43a39d2bbe4b")
 	)
-	(wire
-		(pts
-			(xy 201.93 146.05) (xy 207.01 146.05)
+	(label "bmp_sda"
+		(at 146.05 96.52 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "54a7813a-8f34-43fd-9587-dcee0073e252")
+		(uuid "aac1f205-288e-4911-b62c-e387a626a2ad")
 	)
-	(wire
-		(pts
-			(xy 196.85 157.48) (xy 196.85 144.78)
+	(label "bmp_scl"
+		(at 146.05 88.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61e07c3e-50c6-4906-9f7b-5691ece78980")
-	)
-	(wire
-		(pts
-			(xy 177.8 99.06) (xy 191.77 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6ce34f91-9bf0-404f-a581-0bc17466c92b")
-	)
-	(wire
-		(pts
-			(xy 153.67 148.59) (xy 153.67 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "83580b84-99cf-4c02-a995-f3056a2746db")
-	)
-	(wire
-		(pts
-			(xy 180.34 104.14) (xy 198.12 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "84a0a013-e521-42b2-8262-6055d9c51fac")
-	)
-	(wire
-		(pts
-			(xy 156.21 148.59) (xy 157.48 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8e2895a5-95b0-4cee-a053-a6da944e2a34")
-	)
-	(wire
-		(pts
-			(xy 191.77 118.11) (xy 156.21 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "96b22655-91f3-4fef-aa24-a7a437390a1d")
-	)
-	(wire
-		(pts
-			(xy 198.12 144.78) (xy 207.01 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9fe45ee2-aea1-419e-8664-504c108c189b")
-	)
-	(wire
-		(pts
-			(xy 156.21 118.11) (xy 156.21 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a855668a-e00e-45cf-a9ad-6c6453fb9deb")
-	)
-	(wire
-		(pts
-			(xy 156.21 151.13) (xy 156.21 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a9770605-5b42-4181-abb1-d1a25da8471a")
-	)
-	(wire
-		(pts
-			(xy 198.12 104.14) (xy 198.12 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aab95ea6-ecf6-4c1c-8459-8ff0244afa4b")
-	)
-	(wire
-		(pts
-			(xy 207.01 144.78) (xy 207.01 143.51)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b16ff131-05d5-48a1-8235-c45c1a6f1ca0")
-	)
-	(wire
-		(pts
-			(xy 191.77 99.06) (xy 191.77 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eb3b4da8-9cff-4c6a-9c62-35a80d8a47d8")
-	)
-	(wire
-		(pts
-			(xy 162.56 148.59) (xy 157.48 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ef343ef7-9bd9-4b68-ab11-72a36a64b273")
+		(uuid "bd8fdf3e-88ce-4b32-abe8-6c9720f7532b")
 	)
 	(symbol
 		(lib_id "Teensy 4.1:TEENSY_4.1")
-		(at 209.55 82.55 0)
+		(at 281.94 200.66 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3772,7 +3636,7 @@
 		(fields_autoplaced yes)
 		(uuid "08034feb-dde6-4834-bf4b-eb3450df7043")
 		(property "Reference" "A1"
-			(at 219.71 77.47 0)
+			(at 292.1 195.58 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3782,7 +3646,7 @@
 			)
 		)
 		(property "Value" "TEENSY_4.1"
-			(at 219.71 80.01 0)
+			(at 292.1 198.12 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3792,7 +3656,7 @@
 			)
 		)
 		(property "Footprint" "TEENSY_4.1:TEENSY_LONG_EXT"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3804,7 +3668,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3815,7 +3679,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3827,7 +3691,7 @@
 			)
 		)
 		(property "TEENSY" "4.1"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3839,7 +3703,7 @@
 			)
 		)
 		(property "MF" "PJRC"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3851,7 +3715,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3863,7 +3727,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3875,7 +3739,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/Teensy%204.1/PJRC/view-part/?ref=snap"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3887,7 +3751,7 @@
 			)
 		)
 		(property "MP" "Teensy 4.1"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3899,7 +3763,7 @@
 			)
 		)
 		(property "Availability" "Not in stock"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3911,7 +3775,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/Teensy%204.1/PJRC/view-part/?ref=eda"
-			(at 209.55 82.55 0)
+			(at 281.94 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4083,7 +3947,7 @@
 	)
 	(symbol
 		(lib_id "BNO085:4754")
-		(at 172.72 140.97 0)
+		(at 162.56 140.97 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4094,7 +3958,7 @@
 		(fields_autoplaced yes)
 		(uuid "62f0cf81-2ef6-4ed9-9555-e32b1e3660bc")
 		(property "Reference" "U3"
-			(at 172.72 120.65 0)
+			(at 162.56 120.65 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4104,7 +3968,7 @@
 			)
 		)
 		(property "Value" "BMO085 breakout board"
-			(at 172.72 123.19 0)
+			(at 162.56 123.19 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4114,7 +3978,7 @@
 			)
 		)
 		(property "Footprint" "4754:MODULE_4754"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4126,7 +3990,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4137,7 +4001,7 @@
 			)
 		)
 		(property "Description" "Adafruit 9-DOF Orientation IMU Fusion Breakout - BNO085 (BNO080) - STEMMA QT / Qwiic"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4149,7 +4013,7 @@
 			)
 		)
 		(property "MF" "Adafruit"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4161,7 +4025,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" "4.6mm"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4173,7 +4037,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4185,7 +4049,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4197,7 +4061,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/4754/Adafruit+Industries/view-part/?ref=eda"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4209,7 +4073,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4221,7 +4085,7 @@
 			)
 		)
 		(property "PARTREV" "2021-03-16"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4233,7 +4097,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/4754/Adafruit+Industries/view-part/?ref=snap"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4245,7 +4109,7 @@
 			)
 		)
 		(property "MP" "4754"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4257,7 +4121,7 @@
 			)
 		)
 		(property "MANUFACTURER" "Adafruit"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4269,7 +4133,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4281,7 +4145,7 @@
 			)
 		)
 		(property "SNAPEDA_PN" "4754"
-			(at 172.72 140.97 0)
+			(at 162.56 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4611,7 +4475,7 @@
 	)
 	(symbol
 		(lib_id "BMP585:BMP585_Breakout_Board")
-		(at 167.64 95.25 0)
+		(at 162.56 95.25 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4622,7 +4486,8 @@
 		(fields_autoplaced yes)
 		(uuid "cb8198e3-77f3-4bf4-bcf0-cfc0cdebec66")
 		(property "Reference" "U1"
-			(at 181.61 97.1521 0)
+			(at 176.53 97.1521 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4633,7 +4498,7 @@
 			)
 		)
 		(property "Value" ""
-			(at 167.64 95.25 0)
+			(at 162.56 95.25 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4643,7 +4508,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 167.64 95.25 0)
+			(at 162.56 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4654,7 +4519,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 167.64 95.25 0)
+			(at 162.56 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4665,7 +4530,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 167.64 95.25 0)
+			(at 162.56 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
